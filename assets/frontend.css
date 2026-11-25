@@ -1,0 +1,187 @@
+/* Custom Download Manager - frontend.
+   Colors, radius, spacing and width come from CSS variables set in Download Manager > Form Settings. */
+.cdm-inline,
+.cdm-modal,
+.cdm-open-popup {
+    --cdm-primary: #2563eb;
+    --cdm-bg: #ffffff;
+    --cdm-text: #111827;
+    --cdm-border: #d1d5db;
+    --cdm-input-bg: #ffffff;
+    --cdm-radius: 10px;
+    --cdm-pad: 28px;
+    --cdm-max: 520px;
+    --cdm-fs: 15px;
+    --cdm-shadow: 0 10px 30px rgba(15, 23, 42, .08);
+}
+
+/* Container (inline form) */
+.cdm-inline {
+    box-sizing: border-box;
+    max-width: var(--cdm-max);
+    margin: 24px auto;
+    padding: var(--cdm-pad);
+    background: var(--cdm-bg);
+    color: var(--cdm-text);
+    border: 1px solid var(--cdm-border);
+    border-radius: calc(var(--cdm-radius) + 4px);
+    box-shadow: var(--cdm-shadow);
+    font-size: var(--cdm-fs);
+    line-height: 1.5;
+}
+.cdm-inline *,
+.cdm-modal * { box-sizing: border-box; }
+
+.cdm-form { color: var(--cdm-text); font-size: var(--cdm-fs); margin: 0; }
+.cdm-form .cdm-title {
+    margin: 0 0 6px;
+    padding: 0;
+    color: inherit;
+    font-size: 1.5em;
+    line-height: 1.25;
+    font-weight: 700;
+}
+.cdm-form .cdm-description { margin: 0 0 18px; color: inherit; opacity: .72; }
+.cdm-align-center .cdm-title,
+.cdm-align-center .cdm-description { text-align: center; }
+
+/* Fields */
+.cdm-field { margin: 0 0 16px; }
+.cdm-field[hidden], .cdm-form [hidden] { display: none !important; }
+.cdm-field label { display: block; margin: 0 0 6px; color: inherit; font-weight: 600; font-size: .93em; }
+.cdm-required { color: #dc2626; }
+.cdm-field input:not([type="checkbox"]),
+.cdm-field textarea {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 12px 14px;
+    background: var(--cdm-input-bg);
+    color: var(--cdm-text);
+    border: 1px solid var(--cdm-border);
+    border-radius: var(--cdm-radius);
+    box-shadow: none;
+    font: inherit;
+    line-height: 1.4;
+    transition: border-color .15s, box-shadow .15s;
+}
+.cdm-field textarea { resize: vertical; min-height: 96px; }
+.cdm-field input::placeholder,
+.cdm-field textarea::placeholder { color: var(--cdm-text); opacity: .42; }
+.cdm-field input:not([type="checkbox"]):focus,
+.cdm-field textarea:focus {
+    outline: 0;
+    border-color: var(--cdm-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .18);
+}
+.cdm-field [aria-invalid="true"] { border-color: #dc2626 !important; }
+.cdm-field-checkbox .cdm-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    font-weight: 400;
+    cursor: pointer;
+}
+.cdm-field-checkbox input { width: 18px; height: 18px; margin: 2px 0 0; flex: 0 0 auto; accent-color: var(--cdm-primary); }
+.cdm-field-checkbox a { color: var(--cdm-primary); }
+.cdm-honeypot { position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important; opacity: 0 !important; }
+
+/* Buttons */
+.cdm-open-popup,
+.cdm-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 160px;
+    padding: 13px 22px;
+    background: var(--cdm-primary);
+    color: #fff;
+    border: 0;
+    border-radius: var(--cdm-radius);
+    box-shadow: none;
+    font: inherit;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+    transition: filter .15s, transform .15s, background .15s, color .15s;
+}
+.cdm-open-popup:hover,
+.cdm-submit:hover { filter: brightness(.92); transform: translateY(-1px); }
+.cdm-submit:disabled { opacity: .7; cursor: not-allowed; transform: none; }
+.cdm-btn-full .cdm-submit { display: flex; width: 100%; }
+.cdm-align-center:not(.cdm-btn-full) .cdm-submit { display: flex; margin-left: auto; margin-right: auto; }
+.cdm-btn-outline .cdm-submit { background: transparent; color: var(--cdm-primary); box-shadow: inset 0 0 0 2px var(--cdm-primary); }
+.cdm-btn-outline .cdm-submit:hover { background: var(--cdm-primary); color: #fff; filter: none; }
+
+.cdm-loader {
+    display: none;
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-top-color: #fff;
+    border-radius: 50%;
+}
+.cdm-btn-outline .cdm-loader { border-color: rgba(37, 99, 235, .35); border-top-color: var(--cdm-primary); }
+.cdm-loading .cdm-loader { display: inline-block; animation: cdm-spin .7s linear infinite; }
+.cdm-loading .cdm-submit-text { opacity: .8; }
+@keyframes cdm-spin { to { transform: rotate(360deg); } }
+
+/* Messages */
+.cdm-message { margin-top: 14px; font-size: .93em; }
+.cdm-message:empty { display: none; }
+.cdm-message.cdm-error,
+.cdm-message.cdm-success { padding: 11px 14px; border-radius: var(--cdm-radius); }
+.cdm-message.cdm-error { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+.cdm-message.cdm-success { background: #ecfdf3; color: #067647; border: 1px solid #abefc6; }
+p.cdm-error { color: #b91c1c; }
+
+/* Sending progress bar (shown after the click, before the data is sent) */
+.cdm-form .cdm-progress { display: block; margin: 16px 0 0; padding: 0; color: inherit; text-align: center; }
+.cdm-form .cdm-progress[hidden] { display: none !important; }
+.cdm-form .cdm-progress-text { display: block; margin: 0 0 8px; font-size: .95em; font-weight: 600; font-variant-numeric: tabular-nums; }
+.cdm-form .cdm-progress-text:empty { display: none; }
+.cdm-form .cdm-progress-bar { display: block; width: 100%; height: var(--cdm-bar-h, 10px); overflow: hidden; border-radius: 999px; background: rgba(15, 23, 42, .12); }
+.cdm-form .cdm-progress-fill { display: block; width: 0; height: 100%; border-radius: 999px; background: var(--cdm-bar, #2563eb); transition: width .2s linear; }
+
+/* Etsy offer */
+.cdm-limit-offer[hidden] { display: none; }
+.cdm-limit-offer { margin-top: 16px; padding: 16px; border: 1px solid #f3d9b2; border-radius: var(--cdm-radius); background: #fff9ef; text-align: center; }
+.cdm-limit-offer p { margin: 0 0 12px; color: #6b4c23; font-weight: 600; }
+.cdm-etsy-button { display: inline-flex; align-items: center; justify-content: center; padding: 11px 20px; border-radius: var(--cdm-radius); background: #f1641e; color: #fff; text-decoration: none; font-weight: 700; }
+.cdm-etsy-button:hover, .cdm-etsy-button:focus { background: #d94f0d; color: #fff; }
+
+/* Popup */
+.cdm-modal { position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s; }
+.cdm-modal.cdm-open { opacity: 1; visibility: visible; }
+.cdm-modal-overlay { position: absolute; inset: 0; background: rgba(17, 24, 39, .68); }
+.cdm-modal-panel {
+    position: relative;
+    width: min(var(--cdm-max), calc(100% - 32px));
+    max-height: calc(100vh - 32px);
+    overflow: auto;
+    padding: var(--cdm-pad);
+    background: var(--cdm-bg);
+    color: var(--cdm-text);
+    border-radius: calc(var(--cdm-radius) + 4px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .3);
+    font-size: var(--cdm-fs);
+    transform: translateY(12px);
+    transition: transform .2s;
+}
+.cdm-modal.cdm-open .cdm-modal-panel { transform: none; }
+.cdm-modal-close { position: absolute; right: 12px; top: 8px; width: 36px; height: 36px; border: 0; background: transparent; color: inherit; font-size: 28px; line-height: 1; cursor: pointer; opacity: .6; }
+.cdm-modal-close:hover { opacity: 1; }
+body.cdm-modal-active { overflow: hidden; }
+
+@media (max-width: 600px) {
+    .cdm-inline { padding: min(var(--cdm-pad), 20px); margin: 16px auto; }
+    .cdm-modal-panel { padding: min(var(--cdm-pad), 20px); }
+    .cdm-submit { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .cdm-submit, .cdm-modal, .cdm-modal-panel, .cdm-progress-fill { transition: none; }
+    .cdm-loading .cdm-loader { animation-duration: 1.6s; }
+}
